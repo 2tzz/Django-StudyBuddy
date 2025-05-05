@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from django.contrib.auth import authenticate , login , logout
-from django.http import HttpResponse
+from django.http import HttpResponse , JsonResponse
 from .models import Room,Topic,Message,User
 from .forms import RoomForm , UserForm , MyUserCreationForm
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -214,3 +215,4 @@ def topicsPage(request):
 def activityPage(request):
     room_messages = Message.objects.all()
     return render (request , 'base/activity.html' , {'room_messages' : room_messages})
+
